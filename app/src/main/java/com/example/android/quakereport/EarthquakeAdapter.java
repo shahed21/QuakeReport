@@ -1,7 +1,9 @@
 package com.example.android.quakereport;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +47,7 @@ public class EarthquakeAdapter extends ArrayAdapter {
                             false);
         }
         // Get the {@link Earthquake} at this position in the list
-        Earthquake currentEarthquake = (Earthquake) getItem(position);
+        final Earthquake currentEarthquake = (Earthquake) getItem(position);
 
         TextView magTextView = (TextView) listItemView.findViewById(R.id.mag_text_view);
         TextView nearStringTextView = (TextView) listItemView.findViewById(R.id.near_string_text_view);
@@ -54,6 +56,13 @@ public class EarthquakeAdapter extends ArrayAdapter {
         TextView timeTextView = (TextView) listItemView.findViewById(R.id.time_text_view);
 
         LinearLayout earthquakeContainerLayout = (LinearLayout) listItemView.findViewById(R.id.earthquake_container_layout);
+        earthquakeContainerLayout.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                browserIntent(currentEarthquake.getUrl());
+            }
+        });
+
 
         magTextView.setText(formatMagnitude(currentEarthquake.getMag()));
         // Set the proper background color on the magnitude circle.
@@ -111,6 +120,13 @@ public class EarthquakeAdapter extends ArrayAdapter {
             default:
                 return ContextCompat.getColor(getContext(), R.color.magnitude10plus);
         }
+    }
 
+    private void browserIntent(String url) {
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        if (i!=null) {
+            i.setData(Uri.parse(url));
+            this.getContext().startActivity(i);
+        }
     }
 }

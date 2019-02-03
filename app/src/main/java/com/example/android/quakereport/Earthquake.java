@@ -19,6 +19,9 @@ public class Earthquake {
     // time
     private long mTime;
 
+    // URL
+    private String mUrl;
+
     // Was there a tsunami warning
     private boolean mTsunami;
 
@@ -51,16 +54,19 @@ public class Earthquake {
      * @param mag
      * @param place
      * @param time
+     * @param url
      */
     public Earthquake(
             @NonNull double mag,
             @NonNull String place,
-            @NonNull long time
+            @NonNull long time,
+            String url
     ) {
         this(
                 mag,
                 place,
                 time,
+                url,
                 false,
                 null,
                 0,
@@ -75,6 +81,7 @@ public class Earthquake {
      * @param mag
      * @param place
      * @param time
+     * @param url
      * @param tsunami
      * @param type
      * @param longitude
@@ -87,6 +94,7 @@ public class Earthquake {
             @NonNull double mag,
             @NonNull String place,
             @NonNull long time,
+            String url,
             boolean tsunami,
             String type,
             double longitude,
@@ -98,6 +106,7 @@ public class Earthquake {
         mMag=mag;
         mPlace=place;
         mTime=time;
+        mUrl = url;
         mTsunami=tsunami;
         mType=type;
         mLongitude = longitude;
@@ -190,6 +199,22 @@ public class Earthquake {
      */
     public long getTime() {
         return mTime;
+    }
+
+    /**
+     * returns the URL of the event
+     * @return URL
+     */
+    public String getUrl() {
+        return mUrl;
+    }
+
+    /**
+     * Sets the URL for the event
+     * @param url
+     */
+    public void setUrl(String url) {
+        this.mUrl = url;
     }
 
     /**

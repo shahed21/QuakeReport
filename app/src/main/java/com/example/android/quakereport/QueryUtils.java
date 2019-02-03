@@ -77,12 +77,14 @@ public final class QueryUtils {
 
                 long time = java.lang.Long.parseLong(featurePropertiesObject.optString("time"));
                 String place = featurePropertiesObject.optString("place");
+                String url = featurePropertiesObject.optString("url");
                 double mag = Double.parseDouble(featurePropertiesObject.optString("mag").toString());
 
                 earthquakes.add(new Earthquake(
                         mag,
                         place,
-                        time));
+                        time,
+                        url));
             }
 
         } catch (JSONException e) {
