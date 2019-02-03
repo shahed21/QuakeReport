@@ -5,9 +5,11 @@
     <dimen name="horizontal_padding">16dp</dimen>
     <dimen name="vertical_padding">16dp</dimen>
     <dimen name="eq_list_item_height">88dp</dimen>
-    <dimen name="eq_list_item_mag_width">32dp</dimen>
+    <dimen name="eq_list_item_mag_width">36dp</dimen>
+    <dimen name="eq_list_item_mag_height">36dp</dimen>
     <dimen name="eq_list_item_place_width">160dp</dimen>
     <dimen name="eq_list_item_date_width">128dp</dimen>
 
     <dimen name="medium_text_size">18sp</dimen>
+    <dimen name="magnitude_text_size">16sp</dimen>
 </resources>
