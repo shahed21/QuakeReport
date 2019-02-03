@@ -1,5 +1,6 @@
 package com.example.android.quakereport;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import java.text.SimpleDateFormat;
@@ -41,6 +42,9 @@ public class Earthquake {
 
     //Title
     private String mTitle;
+
+    // the following is used to separate place string
+    private static final String LOCATION_SEPARATOR = " of ";
 
     /**
      * Constructor with all the fields
@@ -148,6 +152,29 @@ public class Earthquake {
      */
     public String getPlace() {
         return mPlace;
+    }
+
+    /**
+     * This method gets landmark for the Earthquake
+     * Location is the major landmark that the earthquake was near
+     */
+    public String getLandmark() {
+        if (mPlace.contains(LOCATION_SEPARATOR)) {
+            return mPlace.substring(mPlace.indexOf(LOCATION_SEPARATOR)+4);
+        }
+        return mPlace;
+    }
+
+    /**
+     * This method gets the "near string" to the landmark for the Earthquake
+     * Location is the major landmark that the earthquake was near
+     * Near string is the small text pin pointing the location near the landmark
+     */
+    public String getNearString(Context context) {
+        if (mPlace.contains(LOCATION_SEPARATOR)) {
+            return mPlace.substring(0, mPlace.indexOf(LOCATION_SEPARATOR)+3);
+        }
+        return context.getString(R.string.near_the);
     }
 
     /**

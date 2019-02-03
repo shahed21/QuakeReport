@@ -8,4 +8,6 @@
     <dimen name="eq_list_item_mag_width">32dp</dimen>
     <dimen name="eq_list_item_place_width">160dp</dimen>
     <dimen name="eq_list_item_date_width">128dp</dimen>
+
+    <dimen name="medium_text_size">18sp</dimen>
 </resources>

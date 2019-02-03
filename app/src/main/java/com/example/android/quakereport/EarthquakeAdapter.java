@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class EarthquakeAdapter extends ArrayAdapter {
     /**
@@ -43,17 +44,32 @@ public class EarthquakeAdapter extends ArrayAdapter {
         Earthquake currentEarthquake = (Earthquake) getItem(position);
 
         TextView magTextView = (TextView) listItemView.findViewById(R.id.mag_text_view);
+        TextView nearStringTextView = (TextView) listItemView.findViewById(R.id.near_string_text_view);
         TextView placeTextView = (TextView) listItemView.findViewById(R.id.place_text_view);
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date_text_view);
+        TextView timeTextView = (TextView) listItemView.findViewById(R.id.time_text_view);
 
         LinearLayout earthquakeContainerLayout = (LinearLayout) listItemView.findViewById(R.id.earthquake_container_layout);
 
-        magTextView.setText(currentEarthquake.getMag()+"");
-        placeTextView.setText(currentEarthquake.getPlace());
+        magTextView.setText(formatMagnitude(currentEarthquake.getMag()));
+        nearStringTextView.setText(currentEarthquake.getNearString(getContext()));
+        placeTextView.setText(currentEarthquake.getLandmark());
         dateTextView.setText(
                 currentEarthquake.getFormattedDate(
-                        new SimpleDateFormat("MMM dd, yyyy")));
+                        new SimpleDateFormat("MMM DD, yyyy")));
+        timeTextView.setText(
+                currentEarthquake.getFormattedDate(
+                        new SimpleDateFormat("h:mm a")));
 
         return listItemView;
+    }
+
+    /**
+     * Return the formatted magnitude string showing 1 decimal place (i.e. "3.2")
+     * from a decimal magnitude value.
+     */
+    private String formatMagnitude(double magnitude) {
+        DecimalFormat magnitudeFormat = new DecimalFormat("0.0");
+        return magnitudeFormat.format(magnitude);
     }
 }
