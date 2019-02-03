@@ -33,7 +33,11 @@ public class EarthquakeAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View listItemView = convertView;
         if (listItemView==null) {
-            listItemView = LayoutInflater.from(getContext()).inflate(R.layout.earthquake_list_item, parent, false);
+            listItemView = LayoutInflater.from(
+                    getContext()).inflate(
+                            R.layout.earthquake_list_item,
+                            parent,
+                            false);
         }
         // Get the {@link Earthquake} at this position in the list
         Earthquake currentEarthquake = (Earthquake) getItem(position);

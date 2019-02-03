@@ -101,7 +101,8 @@ public class Earthquake {
         mDepth = depth;
         mMagType = magType;
         mTitle = title;
-        mDate = new Date((long)time*1000);
+        //mDate = new Date((long)time*1000);
+        mDate = new Date((long)time);
     }
 
     /**
