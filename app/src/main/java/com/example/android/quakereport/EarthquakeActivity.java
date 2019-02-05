@@ -23,6 +23,7 @@ import java.nio.charset.Charset;
 import java.text.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class EarthquakeActivity extends AppCompatActivity {
     private static final String LOG_TAG = EarthquakeActivity.class.getName();
@@ -41,7 +42,7 @@ public class EarthquakeActivity extends AppCompatActivity {
         task.execute(USGS_REQUEST_URL);
     }
 
-    private void updateUi(ArrayList<Earthquake> earthquakes) {
+    private void updateUi(List<Earthquake> earthquakes) {
         EarthquakeAdapter earthquakeAdapter = new EarthquakeAdapter(
                 EarthquakeActivity.this,
                 earthquakes);
@@ -55,10 +56,13 @@ public class EarthquakeActivity extends AppCompatActivity {
     }
 
     private class EarthquakeActivityAsyncTask
-            extends AsyncTask<String, Void, ArrayList<Earthquake>> {
+            extends AsyncTask<String, Void, List<Earthquake>> {
 
         @Override
-        protected ArrayList<Earthquake> doInBackground(String... urls) {
+        protected List<Earthquake> doInBackground(String... urls) {
+            if (urls.length<1 || urls[0]==null) {
+                return null;
+            }
             URL url = createUrl(urls[0]);
             // Perform HTTP request to the URL and receive a JSON response back
             String jsonResponse = "";
@@ -67,7 +71,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             } catch (IOException e) {
                 Log.e(LOG_TAG,"Error with HTTP Request", e);
             }
-            ArrayList<Earthquake> earthquakes = extractEarthquakesFromJson(jsonResponse);
+            List<Earthquake> earthquakes = extractEarthquakesFromJson(jsonResponse);
             return earthquakes;
         }
 
@@ -76,7 +80,7 @@ public class EarthquakeActivity extends AppCompatActivity {
          * {@link EarthquakeActivityAsyncTask}).
          */
         @Override
-        protected void onPostExecute(ArrayList<Earthquake> earthquakes) {
+        protected void onPostExecute(List<Earthquake> earthquakes) {
             if (earthquakes == null) {
                 return;
             }
@@ -160,10 +164,10 @@ public class EarthquakeActivity extends AppCompatActivity {
          * Return a list of {@link Earthquake} objects that has been built up from
          * parsing a JSON response.
          */
-        private ArrayList<Earthquake> extractEarthquakesFromJson(String jsonResponse) {
+        private List<Earthquake> extractEarthquakesFromJson(String jsonResponse) {
 
             // Create an empty ArrayList that we can start adding earthquakes to
-            ArrayList<Earthquake> earthquakes = new ArrayList<>();
+            List<Earthquake> earthquakes = new ArrayList<>();
 
             // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
             // is formatted, a JSONException exception object will be thrown.

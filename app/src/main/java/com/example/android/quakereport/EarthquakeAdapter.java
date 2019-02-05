@@ -17,6 +17,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class EarthquakeAdapter extends ArrayAdapter {
     public static final String LOG_TAG = EarthquakeAdapter.class.getName();
@@ -25,7 +26,7 @@ public class EarthquakeAdapter extends ArrayAdapter {
      * @param context
      * @param objects
      */
-    public EarthquakeAdapter(@NonNull Context context, @NonNull ArrayList objects) {
+    public EarthquakeAdapter(@NonNull Context context, @NonNull List objects) {
         super(context, 0, objects);
     }
 
