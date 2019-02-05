@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.text.DecimalFormat;
 import java.util.List;
 
