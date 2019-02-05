@@ -3,6 +3,7 @@ package com.example.android.quakereport;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -69,7 +70,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             try {
                 jsonResponse = makeHttpRequest(url);
             } catch (IOException e) {
-                Log.e(LOG_TAG,"Error with HTTP Request", e);
+                Log.e(LOG_TAG,"Error Closing the InputStream", e);
             }
             List<Earthquake> earthquakes = extractEarthquakesFromJson(jsonResponse);
             return earthquakes;
@@ -161,10 +162,14 @@ public class EarthquakeActivity extends AppCompatActivity {
         }
 
         /**
-         * Return a list of {@link Earthquake} objects that has been built up from
+         * Return a List of {@link Earthquake} objects that has been built up from
          * parsing a JSON response.
          */
         private List<Earthquake> extractEarthquakesFromJson(String jsonResponse) {
+
+            if (TextUtils.isEmpty(jsonResponse)) {
+                return null;
+            }
 
             // Create an empty ArrayList that we can start adding earthquakes to
             List<Earthquake> earthquakes = new ArrayList<>();
