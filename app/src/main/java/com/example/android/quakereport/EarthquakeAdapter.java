@@ -50,12 +50,14 @@ public class EarthquakeAdapter extends ArrayAdapter {
         final Earthquake currentEarthquake = (Earthquake) getItem(position);
 
         TextView magTextView = (TextView) listItemView.findViewById(R.id.mag_text_view);
-        TextView nearStringTextView = (TextView) listItemView.findViewById(R.id.near_string_text_view);
+        TextView nearStringTextView =
+                (TextView) listItemView.findViewById(R.id.near_string_text_view);
         TextView placeTextView = (TextView) listItemView.findViewById(R.id.place_text_view);
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date_text_view);
         TextView timeTextView = (TextView) listItemView.findViewById(R.id.time_text_view);
 
-        LinearLayout earthquakeContainerLayout = (LinearLayout) listItemView.findViewById(R.id.earthquake_container_layout);
+        LinearLayout earthquakeContainerLayout =
+                (LinearLayout) listItemView.findViewById(R.id.earthquake_container_layout);
         earthquakeContainerLayout.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -80,7 +82,7 @@ public class EarthquakeAdapter extends ArrayAdapter {
         placeTextView.setText(currentEarthquake.getLandmark());
         dateTextView.setText(
                 currentEarthquake.getFormattedDate(
-                        new SimpleDateFormat("MMM DD, yyyy")));
+                        new SimpleDateFormat("MMM d, yyyy")));
         timeTextView.setText(
                 currentEarthquake.getFormattedDate(
                         new SimpleDateFormat("h:mm a")));
