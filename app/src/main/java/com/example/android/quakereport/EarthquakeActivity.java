@@ -28,7 +28,8 @@ public class EarthquakeActivity extends AppCompatActivity {
     private static final String LOG_TAG = EarthquakeActivity.class.getName();
 
     private static final String USGS_REQUEST_URL =
-            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2014-01-01&endtime=2014-12-01&minmagnitude=7";
+            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson"+
+                    "&starttime=2014-01-01&endtime=2014-12-01&minmagnitude=7";
 
 
     @Override
@@ -53,7 +54,8 @@ public class EarthquakeActivity extends AppCompatActivity {
         earthquakeListView.setAdapter(earthquakeAdapter);
     }
 
-    private class EarthquakeActivityAsyncTask extends AsyncTask<String, Void, ArrayList<Earthquake>> {
+    private class EarthquakeActivityAsyncTask
+            extends AsyncTask<String, Void, ArrayList<Earthquake>> {
 
         @Override
         protected ArrayList<Earthquake> doInBackground(String... urls) {
@@ -63,7 +65,7 @@ public class EarthquakeActivity extends AppCompatActivity {
             try {
                 jsonResponse = makeHttpRequest(url);
             } catch (IOException e) {
-                // TODO Handle the IOException
+                Log.e(LOG_TAG,"Error with HTTP Request", e);
             }
             ArrayList<Earthquake> earthquakes = extractEarthquakesFromJson(jsonResponse);
             return earthquakes;
@@ -168,7 +170,6 @@ public class EarthquakeActivity extends AppCompatActivity {
             // Catch the exception so the app doesn't crash, and print the error message to the logs.
             try {
 
-                // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
                 // build up a list of Earthquake objects with the corresponding data.
                 JSONObject earthquakeGeoJsonRootObject = new JSONObject(jsonResponse);
 
