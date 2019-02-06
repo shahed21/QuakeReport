@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,18 +37,24 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
     }
 
     private void updateUi(List<Earthquake> earthquakes) {
-        EarthquakeAdapter earthquakeAdapter = new EarthquakeAdapter(
-                EarthquakeActivity.this,
-                earthquakes);
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        ProgressBar progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
+        progressBar.setVisibility(progressBar.INVISIBLE);
         TextView emptyView = findViewById(R.id.empty);
         emptyView.setText(R.string.empty_string);
+        earthquakeListView.setEmptyView(emptyView);
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
-        earthquakeListView.setAdapter(earthquakeAdapter);
-        earthquakeListView.setEmptyView(emptyView);
+        if ((earthquakes==null)||earthquakes.isEmpty()) {
+            return;
+        } else {
+            EarthquakeAdapter earthquakeAdapter = new EarthquakeAdapter(
+                    EarthquakeActivity.this,
+                    earthquakes);
+            earthquakeListView.setAdapter(earthquakeAdapter);
+        }
     }
 
     @NonNull
