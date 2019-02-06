@@ -6,4 +6,5 @@
     <string name="near_the">Near the</string>
 
     <string name="empty_string">There are not earthquakes to show.</string>
+    <string name="no_network">There are no internet connection.</string>
 </resources>

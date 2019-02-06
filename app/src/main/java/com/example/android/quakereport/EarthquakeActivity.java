@@ -1,5 +1,8 @@
 package com.example.android.quakereport;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -42,8 +45,20 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
         progressBar.setVisibility(progressBar.INVISIBLE);
+
+        ConnectivityManager cm =
+                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnected();
+
         TextView emptyView = findViewById(R.id.empty);
-        emptyView.setText(R.string.empty_string);
+        if (isConnected) {
+            emptyView.setText(R.string.empty_string);
+        } else {
+            emptyView.setText(R.string.no_network);
+        }
         earthquakeListView.setEmptyView(emptyView);
         // Set the adapter on the {@link ListView}
         // so the list can be populated in the user interface
