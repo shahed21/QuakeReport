@@ -35,6 +35,7 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
     @Nullable
     @Override
     public List<Earthquake> loadInBackground() {
+        Log.v(LOG_TAG, "loadInBackground()");
         if (TextUtils.isEmpty(mUrl)) {
             Log.e(LOG_TAG,"Empty URL Passed");
             return null;
@@ -53,6 +54,7 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
 
     @Override
     protected void onStartLoading() {
+        Log.v(LOG_TAG, "onStartLoading()");
         super.onStartLoading();
         forceLoad();
     }
@@ -134,6 +136,7 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
      * parsing a JSON response.
      */
     private List<Earthquake> extractEarthquakesFromJson(String jsonResponse) {
+        Log.v(LOG_TAG, "extractEarthquakesFromJson()");
 
         if (TextUtils.isEmpty(jsonResponse)) {
             return null;
